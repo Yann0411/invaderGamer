@@ -1,0 +1,19 @@
+
+#invader {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 1000px;
+
+}
+
+.grid-row {
+    display: flex;
+}
+
+.grid-cell {
+    flex: 1;
+    border: 1px solid black; /* Pour visualiser les cellules */
+    height: 50px; /* ou la hauteur souhaitée */
+ 
+}
