@@ -25,13 +25,21 @@ var app = {
     handleSubmitFormConfig(event) {
         event.preventDefault();
         app.gridSize = Number(app.inputGridSizeElm.value)
-        app.makeGrid(app.gridSize)
+        // console.log(app.inputGridSizeElm.value)
+     
+
+        // console.log(app.inputPixelSizeElm.value)
+        app.pixelSize =Number(app.inputPixelSizeElm.value)
+    
+
+        app.makeGrid(app.gridSize,app.pixelSize)
+   
 
     },
 
 
 
-    makeGrid(gridSize = 8) {
+    makeGrid(gridSize ,pixelSize) {
 
         app.invaderElm.textContent = ''
         for (let rowIndex = 0; rowIndex < gridSize; rowIndex++) {
@@ -48,6 +56,11 @@ var app = {
                 // console.log(`Row index ${rowIndex} - Pixel index ${pixelIndex}`)
                 let pixelElm = document.createElement('div')
                 pixelElm.classList.add('pixel')
+                pixelElm.style.width=`${app.pixelSize}px`;
+                pixelElm.style.height=`${app.pixelSize}px`;
+
+                console.log(pixelElm.style.height=`height : ${pixelSize}px`)
+        console.log(pixelElm.style.width=` width : ${pixelSize}px`)
 
                 // on ecoute un evenemlent sur le pixel
                 pixelElm.addEventListener('click', app.handleClickPixel)
@@ -60,6 +73,8 @@ var app = {
             app.invaderElm.append(rowElm)
 
         }
+
+      
 
     },
     makeConfigForm() {
@@ -78,9 +93,18 @@ var app = {
 
         app.configFormElm.append(app.inputGridSizeElm)
 
+        app.inputPixelSizeElm = app.inputGridSizeElm.cloneNode();
+        app.inputPixelSizeElm.step=5;
+        app.inputPixelSizeElm.min=5;
+        app.inputPixelSizeElm.max=50;
+
+        app.inputPixelSizeElm.placeholder ='Taille du pixel'
+        app.configFormElm.append(app.inputPixelSizeElm)
+
         var buttonConfigFormElm = document.createElement('button')
         buttonConfigFormElm.classList.add('configuration--button')
         app.configFormElm.append(buttonConfigFormElm)
+        
         buttonConfigFormElm.textContent = 'Valider'
 
         app.configFormElm.addEventListener('submit', app.handleSubmitFormConfig)
